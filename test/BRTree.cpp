@@ -1,6 +1,8 @@
 #include "BRTree.h"
 #pragma once
+#include <string>
 #include<iostream>
+#include<vector>
 using namespace std;         /*BLACK = true*/
 							 /*RED = false*/
 
@@ -361,9 +363,29 @@ using namespace std;         /*BLACK = true*/
 
 	}
 
+	void BRTree::View_Tree(Node* n, int level)
+	{
+		string s;
+		if (n)
+		{
+			View_Tree(n->right, level + 1);
+			for (int i = 0; i < level; i++)
+			{
+				s += "  ";
+			}
+			cout << s << n->key << "\n";
+			View_Tree(n->left, level + 1);
+		}
+	}
+
+	void BRTree::View()
+	{
+		View_Tree(root, 0);
+	}
 	void
 		BRTree::insert(int key)
 	{
+		if (search(key))return;
 		if (root == NULL)
 		{
 			Node* r = new Node;
@@ -522,4 +544,15 @@ using namespace std;         /*BLACK = true*/
 			else return tmp->key;
 		}
 		else return -1;
+	}
+	void BRTree::Tree_to_Vector(vector<int>& a, Node* n)
+	{
+		if (!n)return;
+		Tree_to_Vector(a, n->left);
+		a.push_back(n->key);
+		Tree_to_Vector(a, n->right);
+	}
+	void BRTree::Tree_to_Vector(vector<int>& a)
+	{
+		Tree_to_Vector(a, root);
 	}

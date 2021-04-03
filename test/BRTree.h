@@ -1,5 +1,6 @@
 #pragma once
 #include<iostream>
+#include<vector>
 using namespace std;         /*BLACK = true*/
                              /*RED = false*/
 struct Node {
@@ -18,7 +19,7 @@ private:
 	Node* uncle(Node* n);
 	Node* sibling(Node* n);
 
-
+	void Tree_to_Vector(vector<int>& a,Node* n);
 	void
 		rotate_left(Node* n);
 
@@ -74,7 +75,10 @@ private:
 
 	Node* searchNearMax(Node* n);
 
+	void View_Tree(Node* n, int level);
+
 public:
+	void View();
 	void
 		insert(int key);
 	void
@@ -89,5 +93,7 @@ public:
 		searchNearestLess(int key);
 	int
 		searchNearestMore(int key);
+	void Tree_to_Vector(vector<int>& a);
+
 };
 
